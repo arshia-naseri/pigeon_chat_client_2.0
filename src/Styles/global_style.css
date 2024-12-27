@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "WelcomeFancyTitle";
+  src: url("Assets/Fonts/YeastyFlavorsRegular-yweyd.ttf");
+}
+
+@layer components {
+  body {
+    @apply bg-offWhite;
+  }
+  button {
+    all: unset;
+  }
+  button:hover {
+    cursor: pointer;
+  }
+  /* input {
+    all: unset;
+  } */
+}

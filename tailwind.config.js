@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
@@ -6,8 +7,13 @@ module.exports = {
       colors: {
         primaryPurple: "rgb(175,191,237)",
         primaryPurpleDark: "rgb(108,124,208)",
+        primaryPurpleLight: "#E6EDF9",
+        offWhite: "#F5F5F5",
+      },
+      fontFamily: {
+        cartoonish: ["WelcomeFancyTitle", "sans-serif"],
       },
     },
   },
-  plugins: [],
+  plugins: [require("tailwindcss-textshadow")],
 };
