@@ -1,7 +1,9 @@
 import { useState } from "react";
 
-const TextBox = ({ label, name, isPassword = false }) => {
-  const [showPassword, setShowPassword] = useState(isPassword ? false : null);
+const TextBox = ({ label, name, type }) => {
+  const [showPassword, setShowPassword] = useState(
+    type === "password" ? false : null,
+  );
 
   return (
     <>
@@ -17,9 +19,10 @@ const TextBox = ({ label, name, isPassword = false }) => {
         )}
         <input
           name={name}
-          type={!isPassword || showPassword ? "text" : "password"}
+          type={type === "password" && showPassword ? "text" : type}
           className="peer w-full border-b-2 border-b-slate-400 bg-transparent outline-none focus:border-b-primaryPurpleDark"
           placeholder=" "
+          required
           maxLength="20"
         />
         <div className="pointer-events-none absolute -top-3 left-0 w-full text-xs text-gray-500 transition-all duration-200 peer-placeholder-shown:top-0 peer-placeholder-shown:text-base peer-focus:-top-3 peer-focus:text-xs">

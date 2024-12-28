@@ -1,7 +1,7 @@
 import mainLogo from "Assets/Images/Avatars/bird_main.webp";
 import TextBox from "Components/my_textBox";
 
-const LoginSection = () => {
+const LoginSection = ({ goToSignup }) => {
   return (
     <>
       <main className="relative left-0 flex flex-col items-center gap-5">
@@ -10,8 +10,8 @@ const LoginSection = () => {
           Welcome to PigeonChat
         </div>
         <form className="relative mt-auto flex w-4/5 flex-col items-center gap-7 *:w-full">
-          <TextBox label="Username" name="username" />
-          <TextBox label="Password" name="password" isPassword={true} />
+          <TextBox label="Username" name="username" type="text" />
+          <TextBox label="Password" name="password" type="password" />
           <input
             type="submit"
             value="Login"
@@ -20,9 +20,14 @@ const LoginSection = () => {
         </form>
         <section className="mt-10 text-sm">
           Don't have an account?{" "}
-          <b className="hover:cursor-pointer hover:text-primaryPurpleDark">
-            Sign Up
-          </b>
+          <button>
+            <b
+              className="hover:cursor-pointer hover:text-primaryPurpleDark"
+              onClick={goToSignup}
+            >
+              Sign Up
+            </b>
+          </button>
         </section>
       </main>
     </>

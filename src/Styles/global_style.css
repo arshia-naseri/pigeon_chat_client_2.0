@@ -16,8 +16,6 @@
   }
   button:hover {
     cursor: pointer;
+    scale: 1.05;
   }
-  /* input {
-    all: unset;
-  } */
 }

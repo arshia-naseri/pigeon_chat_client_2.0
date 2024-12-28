@@ -1,7 +1,15 @@
-const SignupSection = () => {
+const SignupSection = ({ goToLogin }) => {
   return (
     <>
-      <div className="left-full bg-blue-200">Signup</div>
+      <main className="relative left-full">
+        <button
+          className="text-offWhite text-shadow-md text-sm font-bold"
+          onClick={goToLogin}
+        >
+          Back to Login
+        </button>
+        <section></section>
+      </main>
     </>
   );
 };
