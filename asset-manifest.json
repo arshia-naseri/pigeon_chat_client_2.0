@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/pigeon_chat_client_2.0/static/css/main.f69cfb07.css",
-    "main.js": "/pigeon_chat_client_2.0/static/js/main.dfecba07.js",
+    "main.css": "/pigeon_chat_client_2.0/static/css/main.53399023.css",
+    "main.js": "/pigeon_chat_client_2.0/static/js/main.438cf897.js",
     "static/media/YeastyFlavorsRegular-yweyd.ttf": "/pigeon_chat_client_2.0/static/media/YeastyFlavorsRegular-yweyd.19703855b6e6f66a46d7.ttf",
     "static/media/fox.webp": "/pigeon_chat_client_2.0/static/media/fox.d2d1899ec40bfbc4c1da.webp",
     "static/media/bird_girl.webp": "/pigeon_chat_client_2.0/static/media/bird_girl.b9e55ee99fb44af692d1.webp",
@@ -18,11 +18,11 @@
     "static/media/pen.png": "/pigeon_chat_client_2.0/static/media/pen.65b75c87498ba88a6f10.png",
     "static/media/default-group.webp": "/pigeon_chat_client_2.0/static/media/default-group.4f95cdddc2a2d69bb84f.webp",
     "index.html": "/pigeon_chat_client_2.0/index.html",
-    "main.f69cfb07.css.map": "/pigeon_chat_client_2.0/static/css/main.f69cfb07.css.map",
-    "main.dfecba07.js.map": "/pigeon_chat_client_2.0/static/js/main.dfecba07.js.map"
+    "main.53399023.css.map": "/pigeon_chat_client_2.0/static/css/main.53399023.css.map",
+    "main.438cf897.js.map": "/pigeon_chat_client_2.0/static/js/main.438cf897.js.map"
   },
   "entrypoints": [
-    "static/css/main.f69cfb07.css",
-    "static/js/main.dfecba07.js"
+    "static/css/main.53399023.css",
+    "static/js/main.438cf897.js"
   ]
 }
