@@ -4,7 +4,7 @@ import TextBox from "Components/my_textBox";
 const LoginSection = ({ goToSignup }) => {
   return (
     <>
-      <main className="relative left-0 flex flex-col items-center justify-around">
+      <main className="relative left-0 flex flex-col items-center justify-around overflow-y-auto">
         <img
           src={mainLogo}
           alt="main logo"

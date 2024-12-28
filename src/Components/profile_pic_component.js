@@ -2,19 +2,22 @@ import CN from "Lib/Cn";
 const ProfilePicComponent = ({
   imageName,
   changable = false,
-  ext = ".webp",
   imgAddClass = "",
   className = "",
+  id = "",
   onClick = () => {},
+  loading = "eager",
 }) => {
   return (
     <>
       <section
         className={CN(
-          "bg-primaryPurpleLight group relative flex aspect-square items-center justify-center rounded-full border shadow-md shadow-primaryPurpleDark hover:scale-[1.04] hover:cursor-pointer",
+          "bg-primaryPurpleLight group relative flex aspect-square items-center justify-center rounded-full border shadow-md shadow-primaryPurpleDark",
           className,
         )}
+        id={id}
         onClick={onClick}
+        data-image-name={imageName}
       >
         {changable && (
           <div className="pointer-events-none invisible z-20 flex h-full w-full items-center justify-center rounded-full bg-black bg-opacity-25 group-hover:visible">
@@ -26,10 +29,10 @@ const ProfilePicComponent = ({
           </div>
         )}
         <img
-          loading="lazy"
+          loading={loading}
           className={CN("absolute w-[60%]", imgAddClass)}
-          src={require("Assets/Images/Avatars/" + imageName + ext)}
-          alt={imageName + ext}
+          src={require("Assets/Images/Avatars/" + imageName)}
+          alt={imageName}
         />
       </section>
     </>

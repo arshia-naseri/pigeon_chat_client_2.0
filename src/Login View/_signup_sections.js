@@ -1,10 +1,14 @@
 import ProfilePic from "Components/profile_pic_component";
 import TextBox from "Components/my_textBox";
 
-const SignupSection = ({ goToLogin, gotToProfileImageSection }) => {
+const SignupSection = ({
+  goToLogin,
+  gotToProfileImageSection,
+  selectedProfilePic,
+}) => {
   return (
     <>
-      <main className="relative left-full">
+      <main className="relative left-full overflow-y-scroll">
         <button
           className="text-offWhite text-shadow-md absolute text-sm font-bold"
           onClick={goToLogin}
@@ -14,9 +18,9 @@ const SignupSection = ({ goToLogin, gotToProfileImageSection }) => {
         <section className="flex h-[80%] w-full flex-col items-center justify-around sm:h-full">
           <section className="relative flex w-full items-center justify-center">
             <ProfilePic
-              imageName="bird_afro"
+              imageName={selectedProfilePic}
               changable={true}
-              className="w-[30%]"
+              className="w-[30%] hover:scale-[1.04] hover:cursor-pointer"
               onClick={gotToProfileImageSection}
             />
 

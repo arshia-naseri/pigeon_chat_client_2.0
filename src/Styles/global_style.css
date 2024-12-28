@@ -18,4 +18,8 @@
     cursor: pointer;
     scale: 1.05;
   }
+
+  #profilePicSelectorHalo {
+    @apply bg-primaryPurpleLight border border-black shadow-lg;
+  }
 }
