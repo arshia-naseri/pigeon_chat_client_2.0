@@ -27,6 +27,12 @@ const WelcomePage = () => {
               behavior: "smooth",
             })
           }
+          gotToProfileImageSection={() =>
+            welcomeContainer.current.scrollTo({
+              left: welcomeContainer.current.offsetWidth * 2,
+              behavior: "smooth",
+            })
+          }
         />
         <ProfileImageSection />
       </section>

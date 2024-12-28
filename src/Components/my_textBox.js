@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const TextBox = ({ label, name, type }) => {
+const TextBox = ({ label, name = label.toLowerCase(), type = "text" }) => {
   const [showPassword, setShowPassword] = useState(
     type === "password" ? false : null,
   );
