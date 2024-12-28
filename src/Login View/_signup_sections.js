@@ -30,7 +30,7 @@ const SignupSection = ({
               className="absolute right-0 aspect-auto w-32"
             />
           </section>
-          <div className="font-cartoonish text-offWhite text-shadow-sm text-3xl font-bold">
+          <div className="font-cartoonish text-offWhite text-shadow-sm text-2xl font-bold sm:text-3xl">
             Make Your Own Account
           </div>
           <form className="flex w-[70%] flex-col items-center gap-6 *:w-full">

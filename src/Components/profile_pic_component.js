@@ -17,6 +17,7 @@ const ProfilePicComponent = ({
         )}
         id={id}
         onClick={onClick}
+        onTouchStart={onClick}
         data-image-name={imageName}
       >
         {changable && (

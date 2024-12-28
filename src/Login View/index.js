@@ -12,7 +12,7 @@ const WelcomePage = () => {
     <main className="flex h-svh w-full items-center">
       <section
         ref={welcomeContainer}
-        className="relative mx-auto flex h-full w-full flex-none shrink-0 overflow-hidden rounded-xl bg-primaryPurple *:absolute *:h-full *:w-full *:p-3 sm:h-[35rem] sm:w-[30rem]"
+        className="relative mx-auto flex h-full w-full flex-none shrink-0 overflow-hidden bg-primaryPurple *:absolute *:h-full *:w-full *:p-3 sm:h-[35rem] sm:w-[30rem] sm:rounded-xl"
       >
         <LoginSection
           goToSignup={() =>
