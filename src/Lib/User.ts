@@ -8,6 +8,7 @@ export class User {
   public _id: string;
   public contacts: any;
   public chatRoomIDList: any;
+  public chatRoomList: any;
   public isDataUpdated: boolean;
 
   constructor() {
@@ -18,6 +19,7 @@ export class User {
     this._id = "";
     this.contacts = [];
     this.chatRoomIDList = [];
+    this.chatRoomList = [];
     this.isDataUpdated = false;
   }
 
@@ -41,20 +43,13 @@ export class User {
       console.log(error);
     }
   }
-  //   getUserData(userID: string) {
-  //     axios
-  //       .post(process.env.REACT_APP_GET_USER_API_URL, { userID })
-  //       .then((res) => {
-  //         const data = res.data[0];
 
-  //         this._id = data._id;
-  //         this.name = data.name;
-  //         this.username = data.username;
-  //         this.password = data.password;
-  //         this.avatarPic = data.avatarPic;
-  //         this.contacts = data.contacts;
-  //         this.chatRoomIDList = data.chatRoomIDList;
-  //       })
-  //       .catch((error) => console.log(error));
-  //   }
+  getChatRoomList() {
+    axios
+      .post(process.env.REACT_APP_GET_USER_CHATROOM_LIST_API_URL, {
+        chatRoomIDList: this.chatRoomIDList,
+      })
+      .then((res) => (this.chatRoomList = res.data))
+      .catch((error) => console.log(error));
+  }
 }

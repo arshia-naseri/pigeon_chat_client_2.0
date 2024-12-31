@@ -11,14 +11,15 @@ const ChatView = () => {
   useEffect(() => {
     const params = new URLSearchParams(window.location.hash.split("?")[1]);
     const uid = params.get("uid");
+    const user = new User();
 
-    const fetchData = async () => {
-      const user = new User();
+    const userData = async () => {
       await user.getUserData(uid);
+      user.getChatRoomList();
       setMainU(user);
     };
 
-    fetchData();
+    userData();
   }, []);
 
   if (!mainU) {
