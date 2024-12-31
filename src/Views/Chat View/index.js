@@ -1,5 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, createContext } from "react";
 import { User } from "Lib/User.ts";
+
+import Sidebar from "./sidebar";
+
+export const materialContext = createContext();
 
 const ChatView = () => {
   /**
@@ -29,7 +33,11 @@ const ChatView = () => {
 
   return (
     <>
-      <div>Chat Page</div>
+      <materialContext.Provider value={{ mainU, setMainU }}>
+        <main>
+          <Sidebar />
+        </main>
+      </materialContext.Provider>
     </>
   );
 };
