@@ -1,14 +1,13 @@
 import axios from "axios";
-
 export class User {
   public name: string;
   public username: string;
   public password: string;
   public avatarPic: string;
   public _id: string;
-  public contacts: any;
-  public chatRoomIDList: any;
-  public chatRoomList: any;
+  public contacts: RelatedUser[];
+  public chatRoomIDList: string[];
+  public chatRoomList: ChatRoom[];
   public isDataUpdated: boolean;
 
   constructor() {
@@ -23,7 +22,12 @@ export class User {
     this.isDataUpdated = false;
   }
 
-  async getUserData(userID: string): Promise<void> {
+  async initialize(userID: string) {
+    await this.getUserData(userID);
+    await this.getChatRoomList();
+  }
+
+  private async getUserData(userID: string): Promise<void> {
     try {
       const res = await axios.post(process.env.REACT_APP_GET_USER_API_URL, {
         userID,
@@ -44,12 +48,17 @@ export class User {
     }
   }
 
-  getChatRoomList() {
-    axios
-      .post(process.env.REACT_APP_GET_USER_CHATROOM_LIST_API_URL, {
-        chatRoomIDList: this.chatRoomIDList,
-      })
-      .then((res) => (this.chatRoomList = res.data))
-      .catch((error) => console.log(error));
+  private async getChatRoomList() {
+    try {
+      const res = await axios.post(
+        process.env.REACT_APP_GET_USER_CHATROOM_LIST_API_URL,
+        {
+          chatRoomIDList: this.chatRoomIDList,
+        },
+      );
+      this.chatRoomList = res.data;
+    } catch (error) {
+      console.log(error);
+    }
   }
 }

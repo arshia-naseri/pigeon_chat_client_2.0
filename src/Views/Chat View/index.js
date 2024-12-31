@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { User } from "Lib/User.ts";
 
 const ChatView = () => {
-  // const mainU = new User();
   /**
    *  @type {[User,Function]}
    */
@@ -13,9 +12,9 @@ const ChatView = () => {
     const uid = params.get("uid");
     const user = new User();
 
+    // Initilize Data
     const userData = async () => {
-      await user.getUserData(uid);
-      user.getChatRoomList();
+      await user.initialize(uid);
       setMainU(user);
     };
 
@@ -23,10 +22,10 @@ const ChatView = () => {
   }, []);
 
   if (!mainU) {
-    return <div>Loading user data...</div>;
+    return <div>Loading data...</div>;
   }
 
-  console.log(mainU);
+  console.log(mainU.chatRoomList[1].participants[0].username);
 
   return (
     <>
