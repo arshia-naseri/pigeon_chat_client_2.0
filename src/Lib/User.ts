@@ -8,7 +8,6 @@ export class User {
   public contacts: RelatedUser[];
   public chatRoomIDList: string[];
   public chatRoomList: ChatRoom[];
-  public isDataUpdated: boolean;
 
   constructor() {
     this.name = "";
@@ -19,7 +18,6 @@ export class User {
     this.contacts = [];
     this.chatRoomIDList = [];
     this.chatRoomList = [];
-    this.isDataUpdated = false;
   }
 
   async initialize(userID: string) {
@@ -41,8 +39,6 @@ export class User {
       this.avatarPic = data.avatarPic;
       this.contacts = data.contacts;
       this.chatRoomIDList = data.chatRoomIDList;
-
-      this.isDataUpdated = true;
     } catch (error) {
       console.log(error);
     }

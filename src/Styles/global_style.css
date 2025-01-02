@@ -19,7 +19,11 @@
     scale: 1.05;
   }
 
+  button:active {
+    scale: 1.05;
+  }
+
   #profilePicSelectorHalo {
-    @apply bg-primaryPurpleLight border border-black shadow-lg;
+    @apply border border-black bg-primaryPurpleLight shadow-lg;
   }
 }
