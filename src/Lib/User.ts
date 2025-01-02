@@ -6,7 +6,7 @@ export class User {
   public avatarPic: string;
   public _id: string;
   public contacts: RelatedUser[];
-  public chatRoomIDList: string[];
+  private chatRoomIDList: string[];
   public chatRoomList: ChatRoom[];
 
   constructor() {
@@ -23,6 +23,16 @@ export class User {
   async initialize(userID: string) {
     await this.getUserData(userID);
     await this.getChatRoomList();
+
+    // ? Removing participant who is self
+    for (let i = 0; i < this.chatRoomList.length; i++) {
+      this.chatRoomList[i].participants = this.chatRoomList[
+        i
+      ].participants.filter((user) => user.username !== this.username);
+    }
+
+    // ? Deleting ID list of chatrooms to cleanup
+    delete this.chatRoomIDList;
   }
 
   private async getUserData(userID: string): Promise<void> {

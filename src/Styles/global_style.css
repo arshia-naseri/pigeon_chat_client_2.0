@@ -26,4 +26,8 @@
   #profilePicSelectorHalo {
     @apply border border-black bg-primaryPurpleLight shadow-lg;
   }
+
+  #chatroomSelect {
+    @apply before:visible before:bg-primaryPurpleLight/70;
+  }
 }

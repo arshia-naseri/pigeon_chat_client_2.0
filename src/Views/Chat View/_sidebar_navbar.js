@@ -2,15 +2,17 @@ import ProfilePicComponent from "Components/profile_pic_component";
 
 const SidebarNavbar = ({ name, username, avatarPic }) => {
   return (
-    <>
-      <nav className="bg-primaryPurpleDark2 [min-w] flex h-28 w-full items-center overflow-hidden px-3">
+    <section>
+      <nav className="bg-primaryPurpleDark2 flex h-28 w-full items-center overflow-hidden px-3">
         <ProfilePicComponent
           imageName={avatarPic}
           className="bg-primaryPurpleLight_half h-[70%] shadow-none"
         />
         <section className="mx-3 min-w-0 flex-1 text-base text-offWhite">
-          <div className="truncate text-3xl font-bold">{name}</div>
-          <div>@{username}</div>
+          <div title={name} className="truncate text-3xl font-bold">
+            {name}
+          </div>
+          <div title={"@" + username}>@{username}</div>
         </section>
 
         <section className="*:bg-primaryPurpleLight_half flex gap-2 *:size-11 *:rounded-[50%] [&>*>img]:mx-auto [&>*>img]:!p-1">
@@ -36,7 +38,7 @@ const SidebarNavbar = ({ name, username, avatarPic }) => {
           </button>
         </section>
       </nav>
-    </>
+    </section>
   );
 };
 
