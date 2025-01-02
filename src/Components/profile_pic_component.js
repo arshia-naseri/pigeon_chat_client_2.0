@@ -12,7 +12,7 @@ const ProfilePicComponent = ({
     <>
       <section
         className={CN(
-          "bg-primaryPurpleLight group relative flex aspect-square items-center justify-center rounded-full border shadow-md shadow-primaryPurpleDark",
+          "group relative flex aspect-square items-center justify-center rounded-full border bg-primaryPurpleLight shadow-md shadow-primaryPurpleDark",
           className,
         )}
         id={id}
@@ -31,7 +31,7 @@ const ProfilePicComponent = ({
         )}
         <img
           loading={loading}
-          className={CN("absolute w-[60%]", imgAddClass)}
+          className={CN("absolute w-[63%]", imgAddClass)}
           src={require("Assets/Images/Avatars/" + imageName)}
           alt={imageName}
         />

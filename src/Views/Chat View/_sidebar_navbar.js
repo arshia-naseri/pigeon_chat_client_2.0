@@ -3,7 +3,7 @@ import ProfilePicComponent from "Components/profile_pic_component";
 const SidebarNavbar = ({ name, username, avatarPic }) => {
   return (
     <>
-      <nav className="bg-primaryPurpleDark2 [min-w] flex h-32 w-full items-center overflow-hidden px-3">
+      <nav className="bg-primaryPurpleDark2 [min-w] flex h-28 w-full items-center overflow-hidden px-3">
         <ProfilePicComponent
           imageName={avatarPic}
           className="bg-primaryPurpleLight_half h-[70%] shadow-none"
