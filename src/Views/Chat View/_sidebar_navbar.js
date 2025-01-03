@@ -3,19 +3,19 @@ import ProfilePicComponent from "Components/profile_pic_component";
 const SidebarNavbar = ({ name, username, avatarPic }) => {
   return (
     <section>
-      <nav className="bg-primaryPurpleDark2 flex h-28 w-full items-center overflow-hidden px-3">
+      <nav className="bg-primaryPurpleDark2 flex h-20 w-full items-center overflow-hidden px-3">
         <ProfilePicComponent
           imageName={avatarPic}
-          className="bg-primaryPurpleLight_half h-[70%] shadow-none"
+          className="bg-primaryPurpleLight_half h-[60%] shadow-none sm:h-[70%]"
         />
-        <section className="mx-3 min-w-0 flex-1 text-base text-offWhite">
-          <div title={name} className="truncate text-3xl font-bold">
+        <section className="mx-3 min-w-0 flex-1 text-sm text-offWhite sm:text-base">
+          <div title={name} className="truncate text-2xl font-bold">
             {name}
           </div>
           <div title={"@" + username}>@{username}</div>
         </section>
 
-        <section className="*:bg-primaryPurpleLight_half flex gap-2 *:size-11 *:rounded-[50%] [&>*>img]:mx-auto [&>*>img]:!p-1">
+        <section className="*:bg-primaryPurpleLight_half flex gap-2 *:size-9 *:rounded-[50%] [&>*>img]:mx-auto [&>*>img]:!p-1">
           <button className="active:bg-primaryPurpleDark">
             <img
               className="w-[90%]"

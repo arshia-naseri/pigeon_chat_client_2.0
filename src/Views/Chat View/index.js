@@ -2,7 +2,7 @@ import { useEffect, useState, createContext } from "react";
 import { User } from "Lib/User.ts";
 
 import Sidebar from "./sidebar";
-import Chatbar from "./chatbar";
+import ChatRoom from "./chatroom";
 
 export const materialContext = createContext();
 
@@ -12,6 +12,7 @@ const ChatView = () => {
    */
   const [user, setUser] = useState(null);
   const [showSideBar, setShowSideBar] = useState(true);
+  const [selectedChatRoomID, setSelectedChatRoomID] = useState("");
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.hash.split("?")[1]);
@@ -31,16 +32,28 @@ const ChatView = () => {
     return <div>Loading data...</div>;
   }
 
+  const toggleSideBar = () => {
+    setShowSideBar((pre) => {
+      const selectElm = document.getElementById("chatroomSelect");
+      if (selectElm && window.innerWidth <= 640) {
+        selectElm.id = "";
+      }
+      return !pre;
+    });
+  };
+
   return (
     <>
       <materialContext.Provider value={{ user, setUser }}>
-        <main className="flex h-svh w-full overflow-hidden bg-yellow-100 *:h-svh sm:relative sm:h-full">
+        <main className="flex h-svh w-full overflow-hidden *:h-svh sm:relative sm:h-full">
           <Sidebar
-            setShowSideBar={setShowSideBar}
+            toggleSideBar={toggleSideBar}
+            setSelectedChatRoomID={setSelectedChatRoomID}
             className={` ${!showSideBar ? "-left-full" : "left-0"} absolute z-10 w-full transition-all duration-200 sm:relative sm:left-0 sm:w-[35%] sm:min-w-[22rem]`}
           />
-          <Chatbar
-            setShowSideBar={setShowSideBar}
+          <ChatRoom
+            selectedChatRoomID={selectedChatRoomID}
+            toggleSideBar={toggleSideBar}
             className="z-0 w-full sm:w-[65%]"
           />
         </main>

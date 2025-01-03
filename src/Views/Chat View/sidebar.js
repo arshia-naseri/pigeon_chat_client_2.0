@@ -8,7 +8,7 @@ import SidebarChatroomList from "./_sidebar_chatroom_list";
  * @typedef {import("Lib/User").User} User
  * */
 
-const Sidebar = ({ className, setShowSideBar }) => {
+const Sidebar = ({ className, toggleSideBar, setSelectedChatRoomID }) => {
   const sidebarRef = useRef();
   /**
    * @type {{ user: User }}
@@ -24,7 +24,10 @@ const Sidebar = ({ className, setShowSideBar }) => {
       child.id = "";
     }
     target.id = "chatroomSelect";
-    setShowSideBar((pre) => !pre);
+
+    toggleSideBar();
+
+    setSelectedChatRoomID(target.getAttribute("data-chatroom-id"));
   };
 
   return (
