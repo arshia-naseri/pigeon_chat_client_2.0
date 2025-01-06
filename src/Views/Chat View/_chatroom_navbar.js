@@ -1,13 +1,18 @@
 import ProfilePicComponent from "Components/profile_pic_component";
-const ChatroomNavbar = ({ imageName, name, toggleSideBar }) => {
+import CN from "Lib/Cn";
+const ChatroomNavbar = ({ imageName, name, toggleSideBar, className }) => {
   return (
     <>
-      <nav className="bg-primaryPurpleDark2 relative flex h-20 w-full items-center overflow-hidden px-3">
+      <nav
+        className={CN(
+          "bg-primaryPurpleDark2 relative flex h-20 w-full items-center overflow-hidden px-3",
+          className,
+        )}
+      >
         <button
           type="button"
           className="relative block w-10 shrink-0 rounded sm:hidden"
           onClick={() => toggleSideBar()}
-          onTouchStart={() => toggleSideBar()}
         >
           <img
             className="w-full"
@@ -20,7 +25,7 @@ const ChatroomNavbar = ({ imageName, name, toggleSideBar }) => {
           className="ml-2 h-[70%] shrink-0 shadow-none"
         />
         <div
-          className="ml-2 mr-2 flex-1 truncate font-sans text-3xl font-bold text-white"
+          className="ml-2 mr-2 flex-1 truncate font-sans text-2xl font-bold text-white"
           title={name}
         >
           {name}

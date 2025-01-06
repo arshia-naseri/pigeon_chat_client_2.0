@@ -3,6 +3,6 @@ interface ChatRoom {
   groupName: string | null;
   isGroupChat: boolean;
   lastUpdate: string;
-  messages: any;
+  messages: { from: RelatedUser; text: string; time: Date }[];
   participants: RelatedUser[];
 }

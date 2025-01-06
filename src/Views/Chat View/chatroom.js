@@ -5,6 +5,8 @@ import { materialContext } from "./index";
  * */
 import CN from "Lib/Cn";
 import ChatroomNavbar from "./_chatroom_navbar";
+import ChatroomMessagesPanel from "./_chatroom_messages_panel";
+import Chatbar from "./chatbar";
 
 const Chatroom = ({ className, toggleSideBar, selectedChatRoomID }) => {
   /**
@@ -43,8 +45,9 @@ const Chatroom = ({ className, toggleSideBar, selectedChatRoomID }) => {
 
   return (
     <>
-      <main className={CN("w-full bg-offWhite", className)}>
+      <main className={CN("flex h-3 w-full flex-col bg-offWhite", className)}>
         <ChatroomNavbar
+          className="shrink-0"
           imageName={
             chatRoomObj.isGroupChat
               ? "default-group.webp"
@@ -53,9 +56,30 @@ const Chatroom = ({ className, toggleSideBar, selectedChatRoomID }) => {
           name={chatRoomObj.groupName || chatRoomObj.participants[0].name}
           toggleSideBar={toggleSideBar}
         />
+        <ChatroomMessagesPanel
+          className="bg-green-400 py-3"
+          messages={chatRoomObj.messages}
+        />
+        <Chatbar />
       </main>
     </>
   );
 };
+
+{
+  /* <textarea
+          rows="1"
+          onClick={(e) =>
+            console.log(
+              JSON.stringify(e.currentTarget.value).replace(/\\n/g, "<br/>"),
+            )
+          }
+          className="mt-56 box-border w-full resize-none overflow-hidden"
+          onInput={(e) => {
+            e.currentTarget.style.height = "auto";
+            e.currentTarget.style.height = e.currentTarget.scrollHeight + "px";
+          }}
+        /> */
+}
 
 export default Chatroom;
