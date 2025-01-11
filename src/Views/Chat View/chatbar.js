@@ -1,5 +1,6 @@
-const Chatbar = () => {
-  return <div className="bg-red-400">Chat Bar</div>;
+import CN from "Lib/Cn";
+const Chatbar = ({ className }) => {
+  return <div className={CN("", className)}>Chat Bar</div>;
 };
 
 export default Chatbar;

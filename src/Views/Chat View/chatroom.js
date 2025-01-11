@@ -45,7 +45,9 @@ const Chatroom = ({ className, toggleSideBar, selectedChatRoomID }) => {
 
   return (
     <>
-      <main className={CN("flex h-3 w-full flex-col bg-offWhite", className)}>
+      <main
+        className={CN("flex h-full w-full flex-col bg-offWhite", className)}
+      >
         <ChatroomNavbar
           className="shrink-0"
           imageName={
@@ -57,10 +59,12 @@ const Chatroom = ({ className, toggleSideBar, selectedChatRoomID }) => {
           toggleSideBar={toggleSideBar}
         />
         <ChatroomMessagesPanel
-          className="bg-green-400 py-3"
+          className="flex-1 shrink-0 pb-3 pt-1"
           messages={chatRoomObj.messages}
+          isChatRoom={chatRoomObj.isGroupChat}
+          mainUsername={user.username}
         />
-        <Chatbar />
+        <Chatbar className="flex-grow-0 bg-blue-400" />
       </main>
     </>
   );
