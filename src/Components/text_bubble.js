@@ -1,6 +1,6 @@
 import CN from "Lib/Cn";
 
-const TextBubble = ({ text, time, className = "", isMainU }) => {
+const TextBubble = ({ user, text, time, className = "", isMainU }) => {
   return (
     <section
       className={CN(
@@ -18,6 +18,7 @@ const TextBubble = ({ text, time, className = "", isMainU }) => {
       <div className="ml-auto w-fit text-xs text-slate-700">{time}</div>
       {/* Triangle */}
       <div
+        data-message-bubble-triangle={user}
         className={CN(
           "absolute top-full -z-10 size-4 -translate-y-full",
           isMainU

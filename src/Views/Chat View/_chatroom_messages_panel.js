@@ -28,18 +28,41 @@ const ChatroomMessagesPanel = ({
   };
 
   const chatroomCleanup = () => {
-    // Remove similar dates
-    const elms = document.getElementsByClassName("dateBanner");
-    console.log("checked");
-    let prevDate = "";
-    for (let elm of elms) {
-      elm.style.display = "block";
-      if (prevDate === elm.innerHTML) {
-        elm.style.display = "none";
-      } else {
-        prevDate = elm.innerHTML;
+    const dateCleanup = () => {
+      // Remove similar dates
+      const elms = document.getElementsByClassName("dateBanner");
+      let prevDate = "";
+      for (let elm of elms) {
+        elm.style.display = "block";
+        if (prevDate === elm.innerHTML) {
+          elm.style.display = "none";
+        } else {
+          prevDate = elm.innerHTML;
+        }
       }
-    }
+    };
+
+    const messageBubbleCleanup = () => {
+      let elms = document.querySelectorAll("[data-message-bubble-triangle]");
+      elms = [...elms].reverse();
+      let prevUser = "";
+      for (let elm of elms) {
+        let currUser = elm.getAttribute("data-message-bubble-triangle");
+        elm.style.display = "block";
+
+        if (prevUser === currUser) {
+          let grandparent = elm.parentElement?.parentElement.parentElement;
+          console.log(grandparent);
+          grandparent.style.setProperty("margin-bottom", "0.3rem", "important");
+          elm.style.display = "none";
+        } else {
+          prevUser = currUser;
+        }
+      }
+    };
+
+    dateCleanup();
+    messageBubbleCleanup();
   };
 
   useEffect(() => {
@@ -49,7 +72,7 @@ const ChatroomMessagesPanel = ({
   return (
     <>
       <section className={CN("overflow-scroll px-3", className)}>
-        <section className="flex flex-col">
+        <section className="flex flex-col py-3">
           {messages.map((messageItem, index) => {
             messageItem.time = new Date(messageItem.time);
             return (
@@ -58,12 +81,12 @@ const ChatroomMessagesPanel = ({
                 {/* Date Banner */}
                 <div
                   data-date-banner={index}
-                  className="dateBanner mx-auto mt-3 w-fit rounded-3xl bg-slate-300 px-3 opacity-50"
+                  className="dateBanner mx-auto my-5 w-fit rounded-3xl bg-slate-300 px-3 opacity-50"
                 >
                   {getDateTitle(messageItem.time)}
                 </div>
 
-                <section className="my-2 flex gap-[.4rem]">
+                <section className="mb-4 flex gap-[.4rem]">
                   {mainUsername !== messageItem.from.username && isChatRoom && (
                     <ProfilePicComponent
                       imageName={messageItem.from.avatarPic}
@@ -78,6 +101,7 @@ const ChatroomMessagesPanel = ({
                         </div>
                       )}
                     <TextBubble
+                      user={messageItem.from.username}
                       text={messageItem.text.replace(/\\n/g, "<br/>")}
                       time={messageItem.time.toLocaleTimeString("en-US", {
                         hour: "2-digit",
