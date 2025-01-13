@@ -13,6 +13,7 @@ const ChatroomMessagesPanel = ({
   className,
   isChatRoom,
   mainUsername,
+  selectedChatRoomID,
 }) => {
   /**
    * @param {Date} messageDate
@@ -26,18 +27,24 @@ const ChatroomMessagesPanel = ({
     return messageDate.toDateString();
   };
 
-  useEffect(() => {
+  const chatroomCleanup = () => {
     // Remove similar dates
     const elms = document.getElementsByClassName("dateBanner");
+    console.log("checked");
     let prevDate = "";
     for (let elm of elms) {
+      elm.style.display = "block";
       if (prevDate === elm.innerHTML) {
         elm.style.display = "none";
       } else {
         prevDate = elm.innerHTML;
       }
     }
-  }, []);
+  };
+
+  useEffect(() => {
+    chatroomCleanup();
+  }, [selectedChatRoomID]);
 
   return (
     <>
@@ -51,7 +58,7 @@ const ChatroomMessagesPanel = ({
                 {/* Date Banner */}
                 <div
                   data-date-banner={index}
-                  className="dateBanner mx-auto mt-3 w-fit rounded-3xl bg-slate-300 px-3"
+                  className="dateBanner mx-auto mt-3 w-fit rounded-3xl bg-slate-300 px-3 opacity-50"
                 >
                   {getDateTitle(messageItem.time)}
                 </div>
@@ -60,7 +67,7 @@ const ChatroomMessagesPanel = ({
                   {mainUsername !== messageItem.from.username && isChatRoom && (
                     <ProfilePicComponent
                       imageName={messageItem.from.avatarPic}
-                      className="mt-auto size-[3rem] border-[0.5px] border-black/5 bg-primaryPurpleLight_half shadow-none"
+                      className="mt-auto size-[2rem] border-[0.5px] border-black/5 bg-primaryPurpleLight_half shadow-none"
                     />
                   )}
                   <section className="flex-1">

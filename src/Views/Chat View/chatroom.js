@@ -59,10 +59,11 @@ const Chatroom = ({ className, toggleSideBar, selectedChatRoomID }) => {
           toggleSideBar={toggleSideBar}
         />
         <ChatroomMessagesPanel
-          className="flex-1 shrink-0 pb-3 pt-1"
+          className="flex-1 shrink-0"
           messages={chatRoomObj.messages}
           isChatRoom={chatRoomObj.isGroupChat}
           mainUsername={user.username}
+          selectedChatRoomID={selectedChatRoomID}
         />
         <Chatbar className="flex-grow-0 bg-blue-400" />
       </main>
