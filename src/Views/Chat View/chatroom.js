@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import { materialContext } from "./index";
 /**
  * @typedef {import("Lib/User").User} User
@@ -14,6 +14,12 @@ const Chatroom = ({ className, toggleSideBar, selectedChatRoomID }) => {
    */
   const context = useContext(materialContext);
   const { user } = context;
+  const chatContainerRef = useRef();
+
+  const bottomScrollChat = () => {
+    chatContainerRef.current.scrollTo(0, chatContainerRef.current.scrollHeight);
+  };
+
   if (selectedChatRoomID === "")
     return (
       <>
@@ -43,6 +49,14 @@ const Chatroom = ({ className, toggleSideBar, selectedChatRoomID }) => {
     (chatroom) => chatroom._id === selectedChatRoomID,
   )[0];
 
+  const sendMessageForm = (e) => {
+    e.preventDefault();
+    let text = e.currentTarget.elements["text"].value;
+    if (text === "") return;
+
+    let HTMLtext = JSON.stringify(text).replace(/\\n/g, "<br/>");
+  };
+
   return (
     <>
       <main
@@ -64,27 +78,17 @@ const Chatroom = ({ className, toggleSideBar, selectedChatRoomID }) => {
           isChatRoom={chatRoomObj.isGroupChat}
           mainUsername={user.username}
           selectedChatRoomID={selectedChatRoomID}
+          chatContainerRef={chatContainerRef}
+          bottomScrollChat={bottomScrollChat}
         />
-        <Chatbar className="flex-grow-0 bg-blue-400" />
+        <Chatbar
+          bottomScrollChat={bottomScrollChat}
+          sendMessageForm={sendMessageForm}
+          className="flex-grow-0 bg-primaryPurpleLight_half"
+        />
       </main>
     </>
   );
 };
-
-{
-  /* <textarea
-          rows="1"
-          onClick={(e) =>
-            console.log(
-              JSON.stringify(e.currentTarget.value).replace(/\\n/g, "<br/>"),
-            )
-          }
-          className="mt-56 box-border w-full resize-none overflow-hidden"
-          onInput={(e) => {
-            e.currentTarget.style.height = "auto";
-            e.currentTarget.style.height = e.currentTarget.scrollHeight + "px";
-          }}
-        /> */
-}
 
 export default Chatroom;

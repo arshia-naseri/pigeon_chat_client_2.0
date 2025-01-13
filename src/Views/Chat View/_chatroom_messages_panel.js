@@ -14,6 +14,8 @@ const ChatroomMessagesPanel = ({
   isChatRoom,
   mainUsername,
   selectedChatRoomID,
+  chatContainerRef,
+  bottomScrollChat,
 }) => {
   /**
    * @param {Date} messageDate
@@ -52,7 +54,6 @@ const ChatroomMessagesPanel = ({
 
         if (prevUser === currUser) {
           let grandparent = elm.parentElement?.parentElement.parentElement;
-          console.log(grandparent);
           grandparent.style.setProperty("margin-bottom", "0.3rem", "important");
           elm.style.display = "none";
         } else {
@@ -67,11 +68,15 @@ const ChatroomMessagesPanel = ({
 
   useEffect(() => {
     chatroomCleanup();
+    bottomScrollChat();
   }, [selectedChatRoomID]);
 
   return (
     <>
-      <section className={CN("overflow-scroll px-3", className)}>
+      <section
+        ref={chatContainerRef}
+        className={CN("overflow-scroll px-3", className)}
+      >
         <section className="flex flex-col py-3">
           {messages.map((messageItem, index) => {
             messageItem.time = new Date(messageItem.time);
