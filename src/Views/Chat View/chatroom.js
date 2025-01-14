@@ -10,10 +10,10 @@ import Chatbar from "./chatbar";
 
 const Chatroom = ({ className, toggleSideBar, selectedChatRoomID }) => {
   /**
-   * @type {{ user: User }}
+   * @type {{ user: User}}
    */
   const context = useContext(materialContext);
-  const { user } = context;
+  const { user, setUser } = context;
   const chatContainerRef = useRef();
 
   const bottomScrollChat = () => {
@@ -48,13 +48,41 @@ const Chatroom = ({ className, toggleSideBar, selectedChatRoomID }) => {
   const chatRoomObj = user.chatRoomList.filter(
     (chatroom) => chatroom._id === selectedChatRoomID,
   )[0];
+  const updateMessages = (text, user, time) => {
+    const newMessage = {
+      text: text,
+      user: user,
+      time: time,
+    };
 
+    /**
+     * @param {User} prevUser
+     */
+    setUser((/** @type {User} */ prevUser) => {
+      const chatRoomList = [...prevUser.chatRoomList];
+      const targetIndex = chatRoomList.findIndex(
+        (chatRoom) => chatRoom._id === selectedChatRoomID,
+      );
+      const updatedChatRoom = {
+        ...chatRoomList[targetIndex],
+        messages: [...chatRoomList[targetIndex].messages, newMessage],
+      };
+      chatRoomList[targetIndex] = updatedChatRoom;
+      return {
+        ...prevUser,
+        chatRoomList,
+      };
+    });
+  };
   const sendMessageForm = (e) => {
     e.preventDefault();
+
     let text = e.currentTarget.elements["text"].value;
     if (text === "") return;
 
-    let HTMLtext = JSON.stringify(text).replace(/\\n/g, "<br/>");
+    // let HTMLtext = JSON.stringify(text).replace(/\\n/g, "<br/>");
+
+    updateMessages(text, user.username, new Date().toISOString());
   };
 
   return (
