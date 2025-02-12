@@ -66,7 +66,7 @@ const Chatroom = ({ className, toggleSideBar, selectedChatRoomID }) => {
   }, [user, selectedChatRoomID]);
 
   // ChatRoom Not Selected
-  if (selectedChatRoomID === "") {
+  if (chatRoomObj === undefined) {
     return (
       <>
         <main
@@ -129,11 +129,10 @@ const Chatroom = ({ className, toggleSideBar, selectedChatRoomID }) => {
       { name: user.name, username: user.username, avatarPic: user.avatarPic },
       new Date().toISOString(),
     );
+    textElement.value = "";
+    textElement.focus();
   };
 
-  if (chatRoomObj === undefined) {
-    return <div>ChatRoom Not LOADED!!!</div>;
-  }
   return (
     <>
       <main
