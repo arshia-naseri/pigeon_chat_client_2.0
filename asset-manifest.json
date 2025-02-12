@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/pigeon_chat_client_2.0/static/css/main.365aebf7.css",
-    "main.js": "/pigeon_chat_client_2.0/static/js/main.84f73c6c.js",
+    "main.js": "/pigeon_chat_client_2.0/static/js/main.9a70daf6.js",
     "static/media/YeastyFlavorsRegular-yweyd.ttf": "/pigeon_chat_client_2.0/static/media/YeastyFlavorsRegular-yweyd.19703855b6e6f66a46d7.ttf",
     "static/media/fox.webp": "/pigeon_chat_client_2.0/static/media/fox.d2d1899ec40bfbc4c1da.webp",
     "static/media/bird_girl.webp": "/pigeon_chat_client_2.0/static/media/bird_girl.b9e55ee99fb44af692d1.webp",
@@ -21,10 +21,10 @@
     "static/media/send-icon white.webp": "/pigeon_chat_client_2.0/static/media/send-icon white.b3c92e70592126cc8414.webp",
     "index.html": "/pigeon_chat_client_2.0/index.html",
     "main.365aebf7.css.map": "/pigeon_chat_client_2.0/static/css/main.365aebf7.css.map",
-    "main.84f73c6c.js.map": "/pigeon_chat_client_2.0/static/js/main.84f73c6c.js.map"
+    "main.9a70daf6.js.map": "/pigeon_chat_client_2.0/static/js/main.9a70daf6.js.map"
   },
   "entrypoints": [
     "static/css/main.365aebf7.css",
-    "static/js/main.84f73c6c.js"
+    "static/js/main.9a70daf6.js"
   ]
 }
