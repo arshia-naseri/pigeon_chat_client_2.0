@@ -92,6 +92,18 @@ const Chatroom = ({ className, toggleSideBar, selectedChatRoomID }) => {
     );
   }
 
+  const updateTextAreaHeight = (textAreaElm, maxLineNo = 4) => {
+    const lineHeight = parseInt(
+      window.getComputedStyle(textAreaElm).lineHeight,
+    );
+    const numberOfLines = Math.floor(textAreaElm.scrollHeight / lineHeight);
+
+    if (numberOfLines > maxLineNo) return;
+
+    textAreaElm.style.height = "auto";
+    textAreaElm.style.height = textAreaElm.scrollHeight + "px";
+  };
+
   const updateMessages = (text, from, time) => {
     const newMessage = {
       text: text,
@@ -131,6 +143,7 @@ const Chatroom = ({ className, toggleSideBar, selectedChatRoomID }) => {
     );
     textElement.value = "";
     textElement.focus();
+    updateTextAreaHeight(textElement);
   };
 
   return (
@@ -162,6 +175,7 @@ const Chatroom = ({ className, toggleSideBar, selectedChatRoomID }) => {
           bottomScrollChat={bottomScrollChat}
           sendMessageForm={sendMessageForm}
           className="flex-grow-0 bg-primaryPurpleLight_half"
+          updateTextAreaHeight={updateTextAreaHeight}
         />
       </main>
     </>

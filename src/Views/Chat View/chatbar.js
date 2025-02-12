@@ -3,10 +3,11 @@ import { useState } from "react";
 const Chatbar = ({
   bottomScrollChat,
   className,
-  maxLineNo = 4,
   sendMessageForm,
+  updateTextAreaHeight,
 }) => {
   const [isBtnDisable, setIsBtnDisable] = useState(false);
+
   return (
     <form
       onSubmit={sendMessageForm}
@@ -22,18 +23,8 @@ const Chatbar = ({
         className="mt-auto box-border w-full select-none resize-none overflow-auto rounded-xl p-2 text-lg caret-primaryPurpleDark outline-none"
         onInput={(e) => {
           setIsBtnDisable(e.currentTarget.value.trim().length === 0);
-          const lineHeight = parseInt(
-            window.getComputedStyle(e.currentTarget).lineHeight,
-          );
-          const numberOfLines = Math.floor(
-            e.currentTarget.scrollHeight / lineHeight,
-          );
 
-          if (numberOfLines > maxLineNo) return;
-
-          e.currentTarget.style.height = "auto";
-          e.currentTarget.style.height = e.currentTarget.scrollHeight + "px";
-
+          updateTextAreaHeight(e.currentTarget);
           bottomScrollChat();
         }}
       />
