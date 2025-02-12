@@ -1,4 +1,4 @@
-import { useContext, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { materialContext } from "./index";
 /**
  * @typedef {import("Lib/User").User} User
@@ -14,13 +14,59 @@ const Chatroom = ({ className, toggleSideBar, selectedChatRoomID }) => {
    */
   const context = useContext(materialContext);
   const { user, setUser } = context;
+  const [chatRoomObj, setChatRoomObj] = useState(
+    user.chatRoomList.find((chatroom) => chatroom._id === selectedChatRoomID),
+  );
   const chatContainerRef = useRef();
 
+  const chatroomCleanup = () => {
+    const dateCleanup = () => {
+      // Remove similar dates
+      const elms = document.getElementsByClassName("dateBanner");
+      let prevDate = "";
+      for (let elm of elms) {
+        elm.style.display = "block";
+        if (prevDate === elm.innerHTML) {
+          elm.style.display = "none";
+        } else {
+          prevDate = elm.innerHTML;
+        }
+      }
+    };
+
+    const messageBubbleCleanup = () => {
+      let elms = document.querySelectorAll("[data-message-bubble-triangle]");
+      elms = [...elms].reverse();
+      let prevUser = "";
+      for (let elm of elms) {
+        let currUser = elm.getAttribute("data-message-bubble-triangle");
+        elm.style.display = "block";
+
+        if (prevUser === currUser) {
+          let grandparent = elm.parentElement?.parentElement.parentElement;
+          grandparent.style.setProperty("margin-bottom", "0.3rem", "important");
+          elm.style.display = "none";
+        } else {
+          prevUser = currUser;
+        }
+      }
+    };
+
+    dateCleanup();
+    messageBubbleCleanup();
+  };
   const bottomScrollChat = () => {
     chatContainerRef.current.scrollTo(0, chatContainerRef.current.scrollHeight);
   };
 
-  if (selectedChatRoomID === "")
+  useEffect(() => {
+    setChatRoomObj(
+      user.chatRoomList.find((chatroom) => chatroom._id === selectedChatRoomID),
+    );
+  }, [user, selectedChatRoomID]);
+
+  // ChatRoom Not Selected
+  if (selectedChatRoomID === "") {
     return (
       <>
         <main
@@ -44,20 +90,15 @@ const Chatroom = ({ className, toggleSideBar, selectedChatRoomID }) => {
         </main>
       </>
     );
+  }
 
-  const chatRoomObj = user.chatRoomList.filter(
-    (chatroom) => chatroom._id === selectedChatRoomID,
-  )[0];
-  const updateMessages = (text, user, time) => {
+  const updateMessages = (text, from, time) => {
     const newMessage = {
       text: text,
-      user: user,
+      from: from,
       time: time,
     };
 
-    /**
-     * @param {User} prevUser
-     */
     setUser((/** @type {User} */ prevUser) => {
       const chatRoomList = [...prevUser.chatRoomList];
       const targetIndex = chatRoomList.findIndex(
@@ -68,23 +109,31 @@ const Chatroom = ({ className, toggleSideBar, selectedChatRoomID }) => {
         messages: [...chatRoomList[targetIndex].messages, newMessage],
       };
       chatRoomList[targetIndex] = updatedChatRoom;
+
       return {
         ...prevUser,
         chatRoomList,
       };
     });
   };
+
   const sendMessageForm = (e) => {
     e.preventDefault();
-
-    let text = e.currentTarget.elements["text"].value;
+    const textElement = e.currentTarget.elements["text"];
+    let text = textElement.value;
     if (text === "") return;
+    let HTMLtext = JSON.stringify(text).replace(/\\n/g, "<br/>").slice(1, -1);
 
-    // let HTMLtext = JSON.stringify(text).replace(/\\n/g, "<br/>");
-
-    updateMessages(text, user.username, new Date().toISOString());
+    updateMessages(
+      HTMLtext,
+      { name: user.name, username: user.username, avatarPic: user.avatarPic },
+      new Date().toISOString(),
+    );
   };
 
+  if (chatRoomObj === undefined) {
+    return <div>ChatRoom Not LOADED!!!</div>;
+  }
   return (
     <>
       <main
@@ -106,6 +155,7 @@ const Chatroom = ({ className, toggleSideBar, selectedChatRoomID }) => {
           isChatRoom={chatRoomObj.isGroupChat}
           mainUsername={user.username}
           selectedChatRoomID={selectedChatRoomID}
+          chatroomCleanup={chatroomCleanup}
           chatContainerRef={chatContainerRef}
           bottomScrollChat={bottomScrollChat}
         />

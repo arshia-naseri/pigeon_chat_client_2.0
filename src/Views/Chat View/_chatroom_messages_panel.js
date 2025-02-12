@@ -16,6 +16,7 @@ const ChatroomMessagesPanel = ({
   selectedChatRoomID,
   chatContainerRef,
   bottomScrollChat,
+  chatroomCleanup,
 }) => {
   /**
    * @param {Date} messageDate
@@ -29,48 +30,15 @@ const ChatroomMessagesPanel = ({
     return messageDate.toDateString();
   };
 
-  const chatroomCleanup = () => {
-    const dateCleanup = () => {
-      // Remove similar dates
-      const elms = document.getElementsByClassName("dateBanner");
-      let prevDate = "";
-      for (let elm of elms) {
-        elm.style.display = "block";
-        if (prevDate === elm.innerHTML) {
-          elm.style.display = "none";
-        } else {
-          prevDate = elm.innerHTML;
-        }
-      }
-    };
-
-    const messageBubbleCleanup = () => {
-      let elms = document.querySelectorAll("[data-message-bubble-triangle]");
-      elms = [...elms].reverse();
-      let prevUser = "";
-      for (let elm of elms) {
-        let currUser = elm.getAttribute("data-message-bubble-triangle");
-        elm.style.display = "block";
-
-        if (prevUser === currUser) {
-          let grandparent = elm.parentElement?.parentElement.parentElement;
-          grandparent.style.setProperty("margin-bottom", "0.3rem", "important");
-          elm.style.display = "none";
-        } else {
-          prevUser = currUser;
-        }
-      }
-    };
-
-    dateCleanup();
-    messageBubbleCleanup();
-  };
-
   useEffect(() => {
+    if (messages.length === 0) return;
     chatroomCleanup();
     bottomScrollChat();
-  }, [selectedChatRoomID]);
+  }, [selectedChatRoomID, messages]);
 
+  if (messages.length === 0) {
+    return <div>Wait</div>;
+  }
   return (
     <>
       <section
