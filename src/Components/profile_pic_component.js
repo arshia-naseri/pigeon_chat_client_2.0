@@ -32,7 +32,11 @@ const ProfilePicComponent = ({
         <img
           loading={loading}
           className={CN("absolute w-[63%]", imgAddClass)}
-          src={require("Assets/Images/Avatars/" + imageName)}
+          src={
+            imageName
+              ? require("Assets/Images/Avatars/" + imageName)
+              : require("Assets/Images/Avatars/bird_main.webp")
+          }
           alt={imageName}
         />
       </section>

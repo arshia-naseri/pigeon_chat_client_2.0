@@ -67,4 +67,17 @@ export class User {
       console.log(error);
     }
   }
+
+  async updateMessages(time, text, roomID) {
+    try {
+      const res = await axios.post(
+        process.env.REACT_APP_UPDATE_CHATROOM_MESSAGE,
+        { id: this._id, time: time, text: text, roomID: roomID },
+      );
+      return res;
+    } catch (error) {
+      console.log(error);
+      console.log("error in message update");
+    }
+  }
 }

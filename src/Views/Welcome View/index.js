@@ -7,7 +7,7 @@ const WelcomePage = () => {
   const welcomeContainer = useRef();
   const [selectedProfilePic, setSelectedProfilePic] =
     useState("bird_main.webp");
-  console.log(process.env.REACT_APP_LOGIN_API_URL);
+
   return (
     <main className="flex h-svh w-full items-center">
       <section

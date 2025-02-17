@@ -129,21 +129,23 @@ const Chatroom = ({ className, toggleSideBar, selectedChatRoomID }) => {
     });
   };
 
-  const sendMessageForm = (e) => {
+  const sendMessageForm = async (e) => {
     e.preventDefault();
     const textElement = e.currentTarget.elements["text"];
     let text = textElement.value;
     if (text === "") return;
     let HTMLtext = JSON.stringify(text).replace(/\\n/g, "<br/>").slice(1, -1);
-
+    const timeStamp = new Date().toISOString();
     updateMessages(
       HTMLtext,
       { name: user.name, username: user.username, avatarPic: user.avatarPic },
-      new Date().toISOString(),
+      timeStamp,
     );
     textElement.value = "";
     textElement.focus();
     updateTextAreaHeight(textElement);
+
+    await user.updateMessages(timeStamp, HTMLtext, selectedChatRoomID);
   };
 
   return (
