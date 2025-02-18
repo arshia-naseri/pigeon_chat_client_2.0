@@ -28,6 +28,9 @@ const Sidebar = ({ className, toggleSideBar, setSelectedChatRoomID }) => {
     toggleSideBar();
 
     setSelectedChatRoomID(target.getAttribute("data-chatroom-id"));
+
+    //? For chatroom notification
+    target.firstChild.style.visibility = "hidden";
   };
 
   return (

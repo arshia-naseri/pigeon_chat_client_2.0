@@ -3,8 +3,10 @@ import { User } from "Lib/User.ts";
 
 import Sidebar from "./sidebar";
 import ChatRoom from "./chatroom";
+import { io } from "socket.io-client";
 
 export const materialContext = createContext();
+const socket = io(process.env.REACT_APP_SOCKET_SERVER);
 
 const ChatView = () => {
   /**
@@ -21,7 +23,7 @@ const ChatView = () => {
 
     // Initilize Data
     const userData = async () => {
-      await tempUser.initialize(uid);
+      await tempUser.initialize(uid, socket);
       setUser(tempUser);
     };
 

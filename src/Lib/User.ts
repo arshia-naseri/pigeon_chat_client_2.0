@@ -1,4 +1,6 @@
 import axios from "axios";
+import { Socket } from "socket.io-client";
+
 export class User {
   public name: string;
   public username: string;
@@ -8,6 +10,7 @@ export class User {
   public contacts: RelatedUser[];
   private chatRoomIDList: string[];
   public chatRoomList: ChatRoom[];
+  private socket: Socket;
 
   constructor() {
     this.name = "";
@@ -20,7 +23,7 @@ export class User {
     this.chatRoomList = [];
   }
 
-  async initialize(userID: string) {
+  async initialize(userID: string, socket: Socket) {
     await this.getUserData(userID);
     await this.getChatRoomList();
 
@@ -30,10 +33,18 @@ export class User {
         i
       ].participants.filter((user) => user.username !== this.username);
     }
+    this.socket = socket;
+
+    // ? Joining chatrooms
+    this.joinChatRoom(this.chatRoomIDList);
 
     // ? Deleting ID list of chatrooms to cleanup
     delete this.chatRoomIDList;
   }
+
+  public joinChatRoom = (chatRoomIDList) => {
+    this.socket.emit("join-room", chatRoomIDList);
+  };
 
   private async getUserData(userID: string): Promise<void> {
     try {

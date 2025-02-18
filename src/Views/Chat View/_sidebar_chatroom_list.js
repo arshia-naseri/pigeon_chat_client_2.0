@@ -21,8 +21,12 @@ const SidebarChatroomList = ({ chatRoomClicked }) => {
               key={index}
               data-chatroom-id={chatRoomItem._id}
               onClick={chatRoomClicked}
-              className="before:bg-primaryPurpleLight_half/80 group relative flex w-full items-center gap-3 px-3 py-5 before:pointer-events-none before:invisible before:absolute before:left-0 before:top-0 before:-z-10 before:h-full before:w-full after:absolute after:bottom-0 after:left-1/2 after:h-[1px] after:w-[85%] after:-translate-x-[50%] after:bg-slate-500/35 after:last:hidden hover:cursor-pointer hover:before:visible sm:before:w-[98%]"
+              className="group relative flex w-full items-center gap-3 px-3 py-5 before:pointer-events-none before:invisible before:absolute before:left-0 before:top-0 before:-z-10 before:h-full before:w-full before:bg-primaryPurpleLight_half/80 after:absolute after:bottom-0 after:left-1/2 after:h-[1px] after:w-[85%] after:-translate-x-[50%] after:bg-slate-500/35 after:last:hidden hover:cursor-pointer hover:before:visible sm:before:w-[98%]"
             >
+              <div
+                data-notification={chatRoomItem._id}
+                className="size-3 rounded-full bg-primaryPurpleDark"
+              ></div>
               <ProfilePicComponent
                 className="w-20 shrink-0 border border-black/20 shadow-none"
                 imageName={
